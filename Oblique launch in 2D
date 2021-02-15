@@ -1,0 +1,104 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main()
+
+    {
+    
+    
+    float x0, x, y0, y;
+    float v0x, vx, v0y, vy;
+    float ang, gr, rad;
+    int dt, t0, t;
+    
+    #define g 9.80665
+    
+    
+        printf("Entre com uma posição inicial em x: ");
+            scanf("%f", &x0);
+
+        printf("Entre com a mesma posição inicial em y: ");
+            scanf("%f", &y0);
+
+        printf("Entre com uma velocidade inicial em x: ");
+            scanf("%f", &v0x);
+
+        printf("Entre com a mesma velocidade inicial em y: ");
+            scanf("%f", &v0y);
+
+        printf("Entre com um tempo inicial: ");
+            scanf("%i", &t0);
+
+        printf("Entre com um tempo final: ");
+            scanf("%i", &t);            
+
+        printf("Insira um ângulo de lançamento em graus: ");
+            scanf("%f", &gr);
+            
+
+
+    rad = 0.017453 * gr;    
+
+        printf("\nO ângulo de lançamento de %.f° em radianos é: %f rad\n", gr, rad);  
+
+    ang = rad; 
+    
+    
+    FILE *lo;
+
+
+    lo = fopen("Dados teóricos", "w");
+    
+    fprintf(lo, "Resultados para plotagem gráfica: \n\n"); 
+    fprintf(lo, "\n\nTempo [s] | Velocidade, x [m/s] | Velocidade, y [m/s] | Posição, x [m] | Posição, y [m]\n\n"); 
+
+
+    
+    /* decomposição vetorial */
+    v0x = v0x * cos(ang);
+    v0y = v0y * sin(ang);
+    /* --------------------- */
+    
+    
+
+    for (t0 = 0; t0 <= t; t0++)
+    
+    {
+
+    x = x0 + v0x * t0;
+    y = y0 + v0y * t0 - g * (t0 * t0)/2;
+    
+    vx = v0x;
+    vy = v0y - g * t0;
+    
+    /* outra possibilidade de resolução 
+    diferencial do problema (e preferencialmente
+    adotando deltat, dt = 1s */
+    
+//    x = x + v0x * dt; 
+//    y = y + v0y * dt;    
+//    v = v0x;
+//    v = v0y - g * dt;
+    
+    /* -------------------------------- */
+    
+    fprintf(lo, "\n%i  %.3f  %.3f  %.3f  %.3f", t0, vx, vy, x, y);
+
+    if (y < 0)
+    {
+       break;
+    }
+    
+    }
+    
+    fclose(lo);    
+    
+    return 0;
+    
+    }
+
+
+
+
+
