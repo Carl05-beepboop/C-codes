@@ -1,0 +1,46 @@
+#include <stdio.h>
+
+int main ()
+
+    {
+        
+    int idadena1, idadea1, dia, mes, ano;  
+    float idade2;
+    
+    
+ /* para não aniversariantes */   
+ 
+    printf("Digite aqui o dia do seu nascimento: ");
+        scanf("%i", &dia);
+    printf("Digite aqui o mês do seu nascimento: "); 
+        scanf("%i", &mes);
+        
+    printf("Digite aqui o ano do seu nascimento: ");
+        scanf("%i", &ano);
+ 
+ 
+    idadena1 = (2020 - ano - 1); 
+    printf("Caso não tenha feito aniversário, a sua idade em anos é %i\n", idadena1);
+    idade2 = (dia + mes*30 + idadena1*365);
+    printf("A sua idade em dias é aproximadamente: %.2f\n", idade2); 
+    
+ /* para aniversariantes */  
+ 
+    printf("Digite aqui o dia do seu nascimento: ");
+        scanf("%i", &dia);
+    printf("Digite aqui o mês do seu nascimento: "); 
+        scanf("%i", &mes);
+        
+    printf("Digite aqui o ano do seu nascimento: ");
+        scanf("%i", &ano);
+ 
+    idadea1 = (2020 - ano);
+    printf("Caso já tenha feito aniversário, a sua idade em anos é %i\n", idadea1);
+    idade2 = (dia + mes*30 + idadea1*365);    
+    printf("A sua idade em dias é aproximadamente: %.2f\n", idade2);   
+    
+  
+    return 0;
+    
+    }
+
