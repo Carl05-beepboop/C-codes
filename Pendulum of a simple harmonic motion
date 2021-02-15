@@ -1,0 +1,153 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main()
+
+    {
+        
+        /* I) forma não diferencial de resolução */    float teta, tetaA, costetaA, arccostetaA, Te, Pe;
+                                                       float teta2, tetaA2;
+        /* II) forma diferencial de resolução */       float tetaD, teta0, teta1;
+                                                       float tetaD2, teta02, teta12;
+        
+        /* I) */                                       float dt, t0, t;
+                                                       float dt2, t02, t2;
+        /* II) */                                      float DT, T0, T, Ti, Tf;
+                                                       float DT2, T02, T2, Ti2, Tf2;
+
+
+        #define g 9.8
+        #define pi 3.14
+        
+  /* informações do(s) problema(s) */
+        float l=2.0;
+        float v0=5;  
+        float vmin= 0.25 * sqrt(g * l);
+        float vc= 2 * sqrt(g * l);
+/* --------------------------------- */
+
+       
+   
+        FILE *out;
+    out = fopen("I) Dados teóricos", "w");
+    
+    fprintf(out, "I) Resultados para plotagem gráfica dentro das aproximações: \n\n"); 
+    fprintf(out, "\n\nTempo, t [s] | Posição, teta(t) [rad]\n\n"); 
+    
+    dt = 0.01;
+    t0 = 0.0;
+    t = 7.0 + dt;
+    
+    for (t0 = 0; t0 <= t; t0+=dt)
+    
+    {
+    teta = tetaA * sin(sqrt(g/l) * t0);
+    tetaA = v0/sqrt(g * l);
+    fprintf(out, "\n%.2f    %.3f", t0, teta);
+    }
+    
+    tetaA = v0/sqrt(g * l);
+    fprintf(out, "\n\nAmplitude: %.3f\n", tetaA);
+    
+
+    Te = 2 * pi * sqrt(l/g);   
+    fprintf(out, "\nPeríodo: %.2f s\n\n", Te); 
+    fclose(out);  
+  //--------------------------------------------------//    
+
+     FILE *out2;  
+    out2 = fopen("II) Dados teóricos", "w");
+    
+    fprintf(out2, "II) Resultados para plotagem gráfica fora das aproximações: \n\n"); 
+    fprintf(out2, "\n\nTempo, t [s] | Posição, teta(t) [rad]\n\n"); 
+    
+    DT = 0.01;
+
+/* --------------------------------------------------------*/
+   /* condição inicial teta(0) */       teta0 = 0.0; 
+   /* tempo */                          T0 = 0.0;
+    fprintf(out2, "\n%.2f    %.3f", T0, teta0);
+
+   /* teta(1) */                        teta1 = v0/l * DT;
+   /* tempo */                          T0 = DT;
+
+    fprintf(out2, "\n%.2f    %.3f", T0, teta1); 
+/* --------------------------------------------------------*/
+
+    DT = 0.01;
+    T0 = 0.0;
+    T = 7.0;
+    Tf = T/DT;
+    
+    teta0 = 0.0;
+    teta1 = v0/l * DT;
+    
+    for (Ti = 2; Ti <= Tf; Ti++)
+    {
+
+    T0 = Ti * DT; 
+    tetaD = 2 * teta1 - (g/l) * (DT*DT) * sin(teta1) - teta0;
+    if(tetaD>pi)
+    {
+    tetaD -= 2*pi;
+    teta1 -= 2*pi;
+    teta0 -= 2*pi;
+    }
+    fprintf(out2, "\n%.2f    %.3f", T0, tetaD);
+    
+    //------------//
+    teta0 = teta1;               
+    teta1 = tetaD;
+    //------------//
+    
+    }
+
+    costetaA = 1 - ((v0 * v0)/(2 * g * l));
+    arccostetaA = acos(costetaA);
+    fprintf(out, "\n\nAmplitude: %.3f\n", arccostetaA);
+    
+//--------------------------------------------------//
+
+    DT2 = 0.01;
+    T02 = 0.0;
+    
+    teta02 = 0.0;
+    teta12 = v0/l * DT2;
+    
+    Pe = -1.0;
+    Ti = 2.0;
+
+    while(Pe<0.0)
+    {
+    tetaD2 = 2 * teta12 - (g/l) * (DT2*DT2) * sin(teta12) - teta02;
+    if(tetaD2>pi)
+    {
+    tetaD2 -= 2*pi;
+    teta12 -= 2*pi;
+    teta02 -= 2*pi;
+    }
+
+    if(tetaD2*teta12<0.0)
+    {
+    Pe = (Ti + tetaD2/(teta12 - tetaD2)) * DT2;
+    
+    if(tetaD2<0.0)
+    Pe *= 2.0;
+    }
+    
+    //------------//
+    teta02 = teta12;
+    teta12 = tetaD2;
+    //------------//
+    
+    Ti++;
+
+    }
+    fprintf(out2, "\nPeríodo: %.3f s\n\n", Pe);
+ 
+    fclose(out2);
+    
+    return 0;
+    
+    }
