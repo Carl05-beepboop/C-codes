@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <math.h>
+
+int main ()
+
+    {
+
+        float a, b, c;
+        float delta;
+        float x;
+        float r1, r2;
+        
+            printf ("Insira um valor para a: ");
+                scanf ("%f", &a);
+
+            printf ("Insira um valor para b: ");
+                scanf ("%f", &b);
+
+            printf ("Insira um valor para c: ");
+                scanf ("%f", &c);
+
+
+    delta = (b * b) - 4 * a * c;
+    x = (- b +- sqrt(delta))/2.0 * a;
+ 
+             printf ("delta = %.2f\n", delta);
+ 
+        if (delta == 0)
+            printf ("Como o seu delta é igual a zero, r1 = r2 e ambos pertencem ao conjunto dos reais: \n");
+
+        if (delta > 0)
+            printf ("Como o seu delta é maior que zero, r1 != r2 e ambos pertencem ao conjunto dos reais: \n");
+
+        if (delta < 0)
+            printf ("Não há raízes reais porque r1 e r2 pertencem ao conjunto dos imaginários. \n");           
+             
+    r1 = (- b + sqrt(delta))/2.0 * a;
+    r2 = (- b - sqrt(delta))/2.0 * a;  
+    
+             printf ("r1 = %.2f\n", r1);
+             printf ("r2 = %.2f\n", r2);
+
+
+
+    return 0;
+
+    }
+
+
+
+
