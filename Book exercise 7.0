@@ -1,0 +1,51 @@
+#include <stdio.h>
+
+ int main ()
+     {
+     
+    float preco;
+    float total;
+    int cont, fpagamento;
+    float cartaodecredito, avista, avista2;
+ 
+    preco++;
+    cont++;
+ 
+ while (preco != 0)
+ 
+    {
+
+        printf("Entre com o preço: ");
+            scanf("%f", &preco);
+ 
+ if (preco != 0) 
+ 
+    {
+        
+    total += preco;
+
+    }
+ 
+    }
+
+        printf ("O valor total da compra é: %.2f\n", total);
+ 
+    cartaodecredito = total/4;
+    avista = total * 0.05;
+    avista2 = total - avista;
+ 
+
+        printf ("Escolha um número que represente a sua forma de pagamento:\n1. À vista; \n2. Cartão de Crédito.\n");
+            scanf("%i", &fpagamento);
+ 
+    if (fpagamento <= 1)
+        printf ("Você acaba de receber um desconto de cinco porcento e portanto terá que pagar um valor de: %.2f \n", avista2);
+
+    else 
+         printf ("Você conseguiu um parcelamento de quatro vezes sem juros e terá que pagar quatro vezes de: %.2f \n", cartaodecredito);
+ 
+ 
+ return 0;
+ 
+    }
+
