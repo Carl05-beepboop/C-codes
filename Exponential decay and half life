@@ -1,0 +1,89 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main()
+
+    {
+    
+
+    float N, N2, deltaN;
+    float tau;
+    float deltat;
+    float lnN;
+    int t0, t, T0, T;
+
+    #define alfa 0.00924 /* constante do material rb82 */
+    deltat = 1;
+    tau = 0.0;
+    
+
+    printf("Entre com uma quantidade inicial de núcleos radioativos: ");
+        scanf("%f", &N);
+    
+    printf("Entre com um tempo inicial: ");
+        scanf("%i", &t0);
+  
+    printf("Entre com um tempo final: ");
+        scanf("%i", &t);
+
+  
+    FILE *fp;
+
+    fp = fopen("Dados teóricos", "w");
+
+    fprintf(fp, "Resultados para plotagem gráfica:\n\nTempo [s] | Núcleos radioativos [N] | ln N(t) \n");    
+    for (t0 = 0; t0 <= t; t0++)
+    
+    { 
+   
+    lnN = log (N);    
+    fprintf(fp, "\n %i   %f   %f", t0, N, lnN);
+    N = N * (1 - alfa * deltat);
+
+    }
+    
+    fclose(fp);
+    
+/* ----------- */  
+
+    printf("\nPara o cálculo da vida média do material, entre com a mesma quantidade inicial de núcleos radioativos: ");
+        scanf("%f", &N2);
+    
+    printf("Agora entre com outro tempo inicial: ");
+        scanf("%i", &T0);
+    
+    printf("Por último, entre com outro tempo final: ");
+        scanf("%i", &T);
+    
+    FILE *fp2;
+
+    fp2 = fopen("Vida média", "w");
+
+    fprintf(fp2, "Tempo de vida média do material: \n\n Tempo [s] | N(t) | DeltaN \n");    
+
+    while (T0 < T)
+    {
+  
+    T0++;
+    deltaN = alfa * deltat * N2;
+    fprintf(fp2, "\n %i   %f   %f", T0, N2, deltaN);
+    N2 = N2 * (1 - alfa * deltat);
+    tau = tau + deltaN * T0;
+
+    }
+    
+    tau = tau/1000.0;
+    printf("\n\nO resultado da somatória/média ponderada que diz o tempo de vida média do material é: %f s", tau);
+
+    
+    fclose(fp2);
+    
+
+    return 0;
+    
+    }
+
+
+
+
