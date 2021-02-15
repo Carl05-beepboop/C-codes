@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main()
+
+    {
+        
+    int ano, idadena, idadea;
+    
+
+/* para não aniversariantes */    
+    printf("Digite o ano do seu nascimento: ");
+        scanf("%i", &ano);
+        
+    idadena = (2020 - ano);
+    printf("Caso já tenha feito aniversário, a sua idade é %i anos\n", idadena);
+    
+/* para aniversariantes */
+   printf("Digite o ano do seu nascimento: ");
+        scanf("%i", &ano);
+        
+    idadea = (2020 - ano - 1);
+    printf("Caso não tenha feito aniversário, a sua idade é %i anos\n", idadea);
+ 
+return 0;
+
+    }
+
