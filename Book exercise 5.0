@@ -1,0 +1,49 @@
+#include <stdio.h>
+
+int main ()
+
+    {
+   
+        int ano;
+
+            printf ("Insira um ano: ");
+                scanf ("%i", &ano);
+                
+
+    if (ano % 400 == 0)
+
+   {
+       
+            printf("%i é um ano bissexto.", ano);
+            
+   }
+
+   else if (ano % 100 == 0)
+   
+   {
+       
+            printf("%i não é um ano bissexto.", ano);
+            
+   }
+
+   else if (ano % 4 == 0)
+   
+   {
+       
+            printf("%i é um ano bissexto.", ano);
+            
+   }
+
+   else
+   
+   {
+       
+            printf("%i não  é um ano bissexto.", ano);
+            
+   }
+
+
+    return 0;
+    
+    }
+
