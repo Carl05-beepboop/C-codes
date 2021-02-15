@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main()
+
+    {
+    
+
+    float B;
+    float deltat;
+    float lnt, lnx;
+    float x;
+    int t0, t;
+
+    #define alfa 0.01 /* constante de duplicação de bactérias */
+    #define lambda 1.01 /* pode ser alterado de acordo com o exercício */
+
+/*  x(t) = B/Bm = limite populacional/densidade */  
+    deltat = 1;
+    
+    
+
+    printf("Entre com uma quantidade inicial de bactérias: ");
+        scanf("%f", &B);
+        
+    printf("Entre com uma densidade populacional inicial: "); 
+        scanf("%f", &x);
+        
+    printf("Entre com um tempo inicial: ");
+        scanf("%i", &t0);
+  
+    printf("Entre com um tempo final: ");
+        scanf("%i", &t);
+
+  
+    FILE *fp;
+
+    fp = fopen("Dados teóricos", "w");
+
+
+    fprintf(fp, "Resultados para plotagem gráfica:\n\nTempo [s] | B(t) | x'(t) | ln(x) | ln(t)\n");    
+    for (t0 = 0; t0 <= t; t0++)
+    
+    {
+        
+    lnt = log(t0);
+    x = lambda * x * (1 - x);
+    lnx = log(x);
+    fprintf(fp, "\n%i  %f  %.10f  %f  %f\n", t0, B, x, lnx, lnt);
+    B = B * (1 + alfa * deltat);
+    
+    }
+    
+  
+    fclose(fp);
+    
+    
+    return 0;
+    
+    }
