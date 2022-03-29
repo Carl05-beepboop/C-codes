@@ -1,0 +1,98 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main()
+{
+
+    double V;
+    double beta;
+    double gamma;
+    int i;
+
+    #define c 300000000
+    
+    FILE *fp;
+
+    fp = fopen("Dados teóricos", "w");
+
+    fprintf(fp, "Fator beta para plotagem gráfica: \n\n V [m/s] | c [m/s] | beta \n"); 
+
+    i=0;
+    V=0;
+    while (V<=c)
+    
+    {
+    i++;
+    V=V+(300*i);    
+    beta=(V/c);
+    fprintf(fp, "\n %.0f   %d   %f", V, c, beta);
+     
+    }
+    
+    fclose(fp);
+    
+        FILE *fp2;
+
+    fp2 = fopen("Fator beta", "w");
+
+    fprintf(fp, "DADOS \n\n\n"); 
+
+    i=0;
+    V=0;
+    while (V<=c)
+    
+    {
+    i++;
+    V=V+(300*i);    
+    beta=(V/c);
+    fprintf(fp2, "%.0f   %f \n", V, beta);
+     
+    }
+    
+    fclose(fp2);
+    
+        FILE *fp3;
+
+    fp3 = fopen("Dados teóricos", "w");
+
+    fprintf(fp3, "Fator gamma para plotagem gráfica: \n\n V [m/s] | c [m/s] | gamma \n"); 
+
+    i=0;
+    V=0;
+    while (V<=c)
+    
+    {
+    i++;
+    V=V+(300*i);    
+    gamma=1/(sqrt(1 - (V/c)));
+    fprintf(fp3, "\n %.0f   %d   %f", V, c, gamma);
+     
+    }
+    
+    fclose(fp3);
+    
+        FILE *fp4;
+
+    fp4 = fopen("Fator gamma", "w");
+
+    fprintf(fp4, "DADOS \n\n\n"); 
+
+    i=0;
+    V=0;
+    while (V<=c)
+    
+    {
+    i++;
+    V=V+(300*i);    
+    gamma=1/(sqrt(1 - (V/c)));
+    fprintf(fp4, "%.0f   %f \n", V, gamma);
+     
+    }
+    
+    fclose(fp4);
+    
+    
+    return 0;
+
+}
